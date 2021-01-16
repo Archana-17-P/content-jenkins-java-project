@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Unit Tests') {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       steps {
         sh 'ant -f test.xml -v'
@@ -17,7 +17,7 @@ pipeline {
     }
     stage('build') {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       steps {
         sh 'ant -f build.xml -v'
@@ -30,7 +30,7 @@ pipeline {
     }
     stage('deploy') {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       steps {
         sh "if ! [ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
@@ -39,7 +39,7 @@ pipeline {
     }
     stage("Running on CentOS") {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       steps {
         sh "wget http://3.16.42.31/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
@@ -57,7 +57,7 @@ pipeline {
     }
     stage('Promote to Green') {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       when {
         branch 'master'
@@ -68,7 +68,7 @@ pipeline {
     }
     stage('Promote Development Branch to Master') {
       agent {
-        label 'API'
+        label 'CentOS'
       }
       when {
         branch 'development'
