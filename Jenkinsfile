@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Unit Tests') {
       agent {
-        label 'apache'
+        label 'API'
       }
       steps {
         sh 'ant -f test.xml -v'
@@ -17,7 +17,7 @@ pipeline {
     }
     stage('build') {
       agent {
-        label 'apache'
+        label 'API'
       }
       steps {
         sh 'ant -f build.xml -v'
@@ -30,7 +30,7 @@ pipeline {
     }
     stage('deploy') {
       agent {
-        label 'apache'
+        label 'API'
       }
       steps {
         sh "if ! [ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
